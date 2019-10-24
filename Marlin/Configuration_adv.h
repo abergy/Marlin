@@ -634,10 +634,10 @@
 // Default stepper release if idle. Set to 0 to deactivate.
 // Steppers will shut down DEFAULT_STEPPER_DEACTIVE_TIME seconds after the last move when DISABLE_INACTIVE_? is true.
 // Time can be set by M18 and M84.
-#define DEFAULT_STEPPER_DEACTIVE_TIME 120
+#define DEFAULT_STEPPER_DEACTIVE_TIME 1200
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
-#define DISABLE_INACTIVE_Z true  // Set to false if the nozzle will fall down on your printed part when print has finished.
+#define DISABLE_INACTIVE_Z true  // set to false if the nozzle will fall down on your printed part when print has finished.
 #define DISABLE_INACTIVE_E true
 
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // minimum feedrate
@@ -753,7 +753,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -918,7 +918,7 @@
 
   //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
 
-  #define EVENT_GCODE_SD_STOP "G28XY"       // G-code to run on Stop Print (e.g., "G28XY" or "G27")
+  //#define EVENT_GCODE_SD_STOP "G28XY"       // G-code to run on Stop Print (e.g., "G28XY" or "G27")
 
   /**
    * Continue after Power-Loss (Creality3D)
@@ -1292,7 +1292,7 @@
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    //#define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
+    #define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
     //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
@@ -1404,7 +1404,7 @@
 //
 #define ARC_SUPPORT               // Disable this feature to save ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-  #define MM_PER_ARC_SEGMENT  1   // Length of each arc segment
+  #define MM_PER_ARC_SEGMENT .15   // Length of each arc segment
   #define MIN_ARC_SEGMENTS   24   // Minimum number of segments in a complete circle
   #define N_ARC_CORRECTION   25   // Number of interpolated segments between corrections
   //#define ARC_P_CIRCLES         // Enable the 'P' parameter to specify complete circles
@@ -1604,7 +1604,6 @@
 #if EXTRUDERS > 1
   // Z raise distance for tool-change, as needed for some extruders
   #define TOOLCHANGE_ZRAISE     2  // (mm)
-  //#define TOOLCHANGE_NO_RETURN   // Never return to the previous position on tool-change
 
   // Retract and prime filament on tool-change
   //#define TOOLCHANGE_FILAMENT_SWAP
@@ -1662,7 +1661,6 @@
                                                   //   Filament can be extruded repeatedly from the Filament Change menu
                                                   //   until extrusion is consistent, and to purge old filament.
   #define ADVANCED_PAUSE_RESUME_PRIME          0  // (mm) Extra distance to prime nozzle after returning from park.
-  //#define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
   #define FILAMENT_UNLOAD_RETRACT_LENGTH      13  // (mm) Unload initial retract length.
@@ -2107,7 +2105,7 @@
     #define X_OVERCURRENT   2000  // (mA) Current where the driver detects an over current (VALID: 375 x (1 - 16) - 6A max - rounds down)
     #define X_STALLCURRENT  1500  // (mA) Current where the driver detects a stall (VALID: 31.25 * (1-128) -  4A max - rounds down)
     #define X_MAX_VOLTAGE    127  // 0-255, Maximum effective voltage seen by stepper
-    #define X_CHAIN_POS       -1  // Position in SPI chain. (<=0 : Not in chain. 1 : Nearest MOSI)
+    #define X_CHAIN_POS        0  // Position in SPI chain, 0=Not in chain, 1=Nearest MOSI
   #endif
 
   #if AXIS_DRIVER_TYPE_X2(L6470)
@@ -2115,7 +2113,7 @@
     #define X2_OVERCURRENT    2000
     #define X2_STALLCURRENT   1500
     #define X2_MAX_VOLTAGE     127
-    #define X2_CHAIN_POS        -1
+    #define X2_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_Y(L6470)
@@ -2123,7 +2121,7 @@
     #define Y_OVERCURRENT     2000
     #define Y_STALLCURRENT    1500
     #define Y_MAX_VOLTAGE      127
-    #define Y_CHAIN_POS         -1
+    #define Y_CHAIN_POS          0
   #endif
 
   #if AXIS_DRIVER_TYPE_Y2(L6470)
@@ -2131,7 +2129,7 @@
     #define Y2_OVERCURRENT    2000
     #define Y2_STALLCURRENT   1500
     #define Y2_MAX_VOLTAGE     127
-    #define Y2_CHAIN_POS        -1
+    #define Y2_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_Z(L6470)
@@ -2139,7 +2137,7 @@
     #define Z_OVERCURRENT     2000
     #define Z_STALLCURRENT    1500
     #define Z_MAX_VOLTAGE      127
-    #define Z_CHAIN_POS         -1
+    #define Z_CHAIN_POS          0
   #endif
 
   #if AXIS_DRIVER_TYPE_Z2(L6470)
@@ -2147,7 +2145,7 @@
     #define Z2_OVERCURRENT    2000
     #define Z2_STALLCURRENT   1500
     #define Z2_MAX_VOLTAGE     127
-    #define Z2_CHAIN_POS        -1
+    #define Z2_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_Z3(L6470)
@@ -2155,7 +2153,7 @@
     #define Z3_OVERCURRENT    2000
     #define Z3_STALLCURRENT   1500
     #define Z3_MAX_VOLTAGE     127
-    #define Z3_CHAIN_POS        -1
+    #define Z3_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_E0(L6470)
@@ -2163,7 +2161,7 @@
     #define E0_OVERCURRENT    2000
     #define E0_STALLCURRENT   1500
     #define E0_MAX_VOLTAGE     127
-    #define E0_CHAIN_POS        -1
+    #define E0_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_E1(L6470)
@@ -2171,7 +2169,7 @@
     #define E1_OVERCURRENT    2000
     #define E1_STALLCURRENT   1500
     #define E1_MAX_VOLTAGE     127
-    #define E1_CHAIN_POS        -1
+    #define E1_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_E2(L6470)
@@ -2179,7 +2177,7 @@
     #define E2_OVERCURRENT    2000
     #define E2_STALLCURRENT   1500
     #define E2_MAX_VOLTAGE     127
-    #define E2_CHAIN_POS        -1
+    #define E2_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_E3(L6470)
@@ -2187,7 +2185,7 @@
     #define E3_OVERCURRENT    2000
     #define E3_STALLCURRENT   1500
     #define E3_MAX_VOLTAGE     127
-    #define E3_CHAIN_POS        -1
+    #define E3_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_E4(L6470)
@@ -2195,7 +2193,7 @@
     #define E4_OVERCURRENT    2000
     #define E4_STALLCURRENT   1500
     #define E4_MAX_VOLTAGE     127
-    #define E4_CHAIN_POS        -1
+    #define E4_CHAIN_POS         0
   #endif
 
   #if AXIS_DRIVER_TYPE_E5(L6470)
@@ -2203,7 +2201,7 @@
     #define E5_OVERCURRENT    2000
     #define E5_STALLCURRENT   1500
     #define E5_MAX_VOLTAGE     127
-    #define E5_CHAIN_POS        -1
+    #define E5_CHAIN_POS         0
   #endif
 
   /**
@@ -2308,7 +2306,7 @@
  *
  * See http://marlinfw.org/docs/configuration/laser_spindle.html for more config details.
  */
-#define SPINDLE_FEATURE
+//#define SPINDLE_LASER_ENABLE
 //#define LASER_FEATURE
 #if EITHER(SPINDLE_FEATURE, LASER_FEATURE)
   #define SPINDLE_LASER_ACTIVE_HIGH     false  // Set to "true" if the on/off function is active HIGH
@@ -2396,7 +2394,7 @@
  * Enables G53 and G54-G59.3 commands to select coordinate systems
  * and G92.1 to reset the workspace to native machine space.
  */
-//#define CNC_COORDINATE_SYSTEMS
+#define CNC_COORDINATE_SYSTEMS
 
 /**
  * Auto-report temperatures with M155 S<seconds>
@@ -2461,7 +2459,7 @@
  * High feedrates may cause ringing and harm print quality.
  */
 //#define PAREN_COMMENTS      // Support for parentheses-delimited comments
-//#define GCODE_MOTION_MODES  // Remember the motion mode (G0 G1 G2 G3 G5 G38.X) and apply for X Y Z E F, etc.
+#define GCODE_MOTION_MODES  // Remember the motion mode (G0 G1 G2 G3 G5 G38.X) and apply for X Y Z E F, etc.
 
 // Enable and set a (default) feedrate for all G0 moves
 //#define G0_FEEDRATE 3000 // (mm/m)
